@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Face Detector</string>
+    <string-array name="images">
+        <item>Rajni</item>
+        <item>Jassi</item>
+        <item>Group Image</item>
+        <item>Fake People</item>
+        <item>FPWE</item>
+        <item>Man or Dog</item>
+    </string-array>
+</resources>
