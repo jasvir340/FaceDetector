@@ -20,6 +20,7 @@ import android.util.SparseArray;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -32,10 +33,12 @@ import java.io.IOException;
 public class MainActivity extends AppCompatActivity {
     ImageView imageView;
     Button btnProgress,browse,capture;
+    ImageButton imageRotateButton;
     Spinner spinner;
     Bitmap myBitmap,tempBitmap;
     Canvas canvas;
     int count;
+    int rotation = 90;
 
     int CAMERA_REQUEST = 999;
     int CAMERA_CODE = 1000;
@@ -76,11 +79,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        imageView=(ImageView)findViewById(R.id.imageView);
-        btnProgress=(Button)findViewById(R.id.btnProgress);
-        spinner=(Spinner)findViewById(R.id.spinner);
-        browse=(Button)findViewById(R.id.browse);
-        capture=(Button)findViewById(R.id.capture);
+
+        imageRotateButton = findViewById(R.id.imageRotateButton);
+        imageView= findViewById(R.id.imageView);
+        btnProgress= findViewById(R.id.btnProgress);
+        spinner= findViewById(R.id.spinner);
+        browse= findViewById(R.id.browse);
+        capture= findViewById(R.id.capture);
+
         getSupportActionBar().hide();
 
         if(checkSelfPermission(android.Manifest.permission.CAMERA) == PackageManager.PERMISSION_DENIED)
@@ -102,6 +108,19 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent i = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
                 startActivityForResult(i,CAMERA_REQUEST);
+            }
+        });
+
+        imageRotateButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                imageView.setRotation(rotation%360);
+                rotation+=90;
+                BitmapDrawable bitmapDrawable = (BitmapDrawable)imageView.getDrawable();
+                myBitmap = bitmapDrawable.getBitmap();
+                tempBitmap=Bitmap.createBitmap(myBitmap.getWidth(),myBitmap.getHeight(), Bitmap.Config.RGB_565);
+                canvas=new Canvas(tempBitmap);
+                canvas.drawBitmap(myBitmap,0,0,null);
             }
         });
 

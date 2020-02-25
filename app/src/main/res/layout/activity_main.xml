@@ -6,15 +6,25 @@
     tools:context="jvtech.facedetector.MainActivity">
 
 
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/rotate"
+        android:textSize="20dp"
+        android:layout_alignParentRight="true"
+        android:id="@+id/imageRotateButton"
+        />
+
     <Spinner
+        android:id="@+id/spinner"
+        style="@style/Widget.AppCompat.Spinner.Underlined"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/spinner"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@id/imageRotateButton"
         android:entries="@array/images"
-        android:layout_marginLeft="15dp"
-        android:gravity="center"
-        style="@style/Widget.AppCompat.Spinner.Underlined"
-        ></Spinner>
+        android:gravity="center"></Spinner>
 
     <ImageView
         android:layout_width="match_parent"
